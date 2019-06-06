@@ -89,8 +89,8 @@ public class App extends javax.swing.JFrame {
         listImage.add(jLabel9);
         listImage.add(jLabel10);
         listImage.add(jLabel11);
-        listImage.add(jLabel2);
-        listImage.add(jLabel3);
+        listImage.add(jLabel12);
+        listImage.add(jLabel13);
         listImage.add(jLabel14);
         listImage.add(jLabel15);
         listImage.add(jLabel16);
@@ -116,13 +116,14 @@ public class App extends javax.swing.JFrame {
         model1.addColumn("Khu vực");
         model1.addColumn("Trạng thái");
         String status = null;
-        if(message != null && message.length() == 16){
+        if(message != null ){
         String [] value = message.split(""); // tách dữ liệu ra từng biến 1
         for(int i =0 ; i< value.length; i++){
-            status = (value[i].equals("o")) ? "Khu vực đang cháy" : "Khu vực bình thường";
+            status = (value[i].equals("f")) ? "Khu vực đang cháy" : "Khu vực bình thường";
             if(status.equals("Khu vực đang cháy")){
                 listImage.get(i).setIcon(new ImageIcon("C:\\Users\\Ki Thuat 88\\Documents\\NetBeansProjects\\App\\src\\Image\\fire.png"));
-               
+            }else{
+                listImage.get(i).setIcon(new ImageIcon("C:\\Users\\Ki Thuat 88\\Documents\\NetBeansProjects\\App\\src\\Image\\OK.png"));
             }
              model1.addRow(new Object[] { "Khu vực " +(i+1), status});
         }    
@@ -503,7 +504,8 @@ public class App extends javax.swing.JFrame {
                 try {
                     arduinoSerial.startGetdata();
                     while (true) {
-                        areaData.append(arduinoSerial.getInputLine() + newline);
+                        
+                        areaData.append(arduinoSerial.getInputLine()+ newline);
                         addValue2Table(arduinoSerial.getInputLine());
                         Thread.sleep(1000);
 
@@ -534,52 +536,52 @@ public class App extends javax.swing.JFrame {
         // TODO add your handling code here:.
         if(flag){
         if(rKV1.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("fooooooooooooooo");
         }
         if(rKV2.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("ofoooooooooooooo");
         }
         if(rKV3.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("oofooooooooooooo");
         }        
         if(rKV4.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("ooofoooooooooooo");
         }       
         if(rKV5.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("oooofooooooooooo");
         }
         if(rKV6.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("ooooofoooooooooo");
         }
         if(rKV7.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("oooooofooooooooo");
         }
         if(rKV8.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("ooooooofoooooooo");
         }
         if(rKV9.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("oooooooofooooooo");
         }
         if(rKV10.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("ooooooooofoooooo");
         }
         if(rKV11.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("oooooooooofooooo");
         }
         if(rKV12.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("ooooooooooofoooo");
         }
         if(rKV13.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("oooooooooooofooo");
         }
         if(rKV14.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("ooooooooooooofoo");
         }
         if(rKV15.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("oooooooooooooofo");
         }
         if(rKV16.isSelected()){
-            arduinoSerial.send("1");
+            arduinoSerial.send("ooooooooooooooof");
         }
         }else{
             areaData.setText("Chưa kết nối đến cổng vi điều khiển");

@@ -23,6 +23,18 @@ public class ConnectionSerial implements SerialPortEventListener {
     private final String namePort;
     CommPortIdentifier portIdentifier;
     private String inputLine;
+    char[] inputlineC = new char[16];
+    boolean flag = true;
+
+    public char[] getInputlineC() {
+        return inputlineC;
+    }
+
+    public void setInputlineC(char[] inputlineC) {
+        this.inputlineC = inputlineC;
+    }
+    
+    
 
     public String getInputLine() {
         return inputLine;
@@ -104,11 +116,19 @@ public class ConnectionSerial implements SerialPortEventListener {
     }
 
     public void send(String data) { // truyền vào data cần gửi
-        try {
-            output.write(data.getBytes());
+        try {           
+            char[] buffer = data.toCharArray();
+            byte[] b = new byte[buffer.length];
+            for (int i = 0; i < b.length; i++) {
+                 b[i] = (byte) buffer[i];
+                 System.out.println(b[i]);
+            }
+            output.write(b);
+
+//            output.write(data.getBytes());
+//            System.out.println(data.getBytes());
             // mã hóa dữ liệu dưới dạng Byte 
             // gửi thông qua luồng dữ liệu SerialPort cổng ra
-            System.out.println(data);
         } catch (Exception e) {
             System.err.println(e.toString());
         }
@@ -143,10 +163,16 @@ public class ConnectionSerial implements SerialPortEventListener {
     @Override
     public synchronized void serialEvent(SerialPortEvent oEvent) {
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
+            int i =0;
+            int c =0;
             try {
-                inputLine = input.readLine();
-                // lưu biến đã đọc được từ bộ nhớ đệm sang 1 String
-                setInputLine(inputLine);   
+
+            while((c = input.read()) != -1 && i < 16) {
+                 inputlineC[i++] = (char) c;
+                 inputLine = new String(inputlineC);
+                 setInputLine(inputLine);
+//                 System.out.println(getInputLine());
+            }
             } catch (Exception e) {
                 System.err.println(e.toString());
             }
